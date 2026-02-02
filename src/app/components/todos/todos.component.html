@@ -1,0 +1,90 @@
+<div class="min-h-screen bg-gray-100 p-6">
+  <!-- HEADER -->
+  <div class="flex justify-between items-center mb-6 max-w-3xl mx-auto">
+    <h2 class="text-2xl font-bold">Todo List</h2>
+
+    <!-- ✅ SINGLE ADD BUTTON -->
+    <a
+      routerLink="/add"
+      class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+    >
+      + Add Todo
+    </a>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="mb-4 max-w-3xl mx-auto">
+    <input
+      type="text"
+      placeholder="Search todos..."
+      [(ngModel)]="searchText"
+      (input)="onSearchChange()"
+      class="w-full p-2 border rounded focus:outline-none focus:ring"
+    />
+  </div>
+
+  <!-- ✅ TODOS LIST -->
+  <div class="grid gap-4 max-w-3xl mx-auto">
+    <div
+      *ngFor="let todo of todos"
+      (click)="viewTodo(todo.id)"
+      class="bg-white rounded-lg shadow p-4 cursor-pointer hover:bg-gray-50"
+    >
+      <h3 class="text-lg font-semibold mb-2">
+        {{ todo.title }}
+      </h3>
+
+      <p class="mb-4">
+        Status:
+        <span
+          class="font-semibold"
+          [ngClass]="todo.completed ? 'text-green-600' : 'text-red-600'"
+        >
+          {{ todo.completed ? "Completed" : "Not Completed" }}
+        </span>
+      </p>
+
+      <div class="flex gap-3">
+        <button
+          (click)="editTodo(todo.id); $event.stopPropagation()"
+          class="px-4 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Edit
+        </button>
+
+        <button
+          (click)="deleteTodo(todo.id); $event.stopPropagation()"
+          class="px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ PAGINATION (ONLY ONCE) -->
+  <div class="flex justify-between items-center mt-8 max-w-3xl mx-auto">
+    <button
+      (click)="prevPage()"
+      [disabled]="page === 1"
+      class="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+    >
+      Prev
+    </button>
+
+    <span class="font-semibold">
+      Page {{ page }} of {{ totalPages }}
+      <span class="text-sm text-gray-500 ml-2">
+        (Remaining: {{ totalPages - page }})
+      </span>
+    </span>
+
+    <button
+      (click)="nextPage()"
+      [disabled]="page === totalPages"
+      class="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+    >
+      Next
+    </button>
+  </div>
+</div>

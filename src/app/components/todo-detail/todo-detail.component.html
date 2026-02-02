@@ -1,0 +1,32 @@
+<div class="min-h-screen bg-gray-100 flex items-center justify-center">
+  <div class="bg-white p-6 rounded-lg shadow w-full max-w-md">
+    <h2 class="text-xl font-bold mb-4 text-center">Todo Details</h2>
+
+    <p class="mb-2">
+      <span class="font-semibold">ID:</span>
+      {{ todo.id }}
+    </p>
+
+    <p class="mb-2">
+      <span class="font-semibold">Title:</span>
+      {{ todo.title }}
+    </p>
+
+    <p class="mb-4">
+      <span class="font-semibold">Status:</span>
+      <span
+        [ngClass]="todo.completed ? 'text-green-600' : 'text-red-600'"
+        class="font-semibold"
+      >
+        {{ todo.completed ? "Completed" : "Not Completed" }}
+      </span>
+    </p>
+
+    <a
+      routerLink="/"
+      class="block text-center bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+    >
+      Back to List
+    </a>
+  </div>
+</div>
